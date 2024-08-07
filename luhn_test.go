@@ -17,7 +17,12 @@ func TestIsValidLuhn(t *testing.T) {
     }
 
     for _, tc := range testCases {
-        result, _ := isValidLuhn(tc.s)
+        result, err := isValidLuhn(tc.s)
+
+		if err != nil {
+			t.Fatalf("stringToIntSlice(%v) throws: %v", tc.s, err)
+		}
+
         if result != tc.expected {
             t.Errorf("isValidLuhn(%v) = %v; want %v", tc.s, result, tc.expected)
         }
@@ -39,10 +44,14 @@ func TestStringToIntSlice(t *testing.T) {
     }
 
     for _, tc := range testCases {
-        result, _ := stringToIntSlice(tc.s)
+        result, err := stringToIntSlice(tc.s)
+
+		if err != nil {
+			t.Fatalf("stringToIntSlice(%v) throws: %v", tc.s, err)
+		}
 
 		if len(result) != len(tc.expected) {
-			t.Errorf("stringToIntSlice(%v) = %v; want %v", tc.s, result, tc.expected)
+			t.Fatalf("stringToIntSlice(%v) len(%v) != len(%v)", tc.s, result, tc.expected)
 		}
 		
 		for i := 0; i < len(result); i++ {

@@ -8,9 +8,9 @@ func stringToIntSlice(s string) ([]int, error) {
 
 	out := []int{}
 
-	for _, r := range s {
+	for i, r := range s {
 		if int(r) < ascii0 || int(r) > ascii9 {
-			return []int{}, fmt.Errorf("character %d is not a number", r)
+			return []int{}, fmt.Errorf("character [%v] at index %d is not a number", string(r), i)
 		}
 		out = append(out, int(r) - ascii0)
 	}
