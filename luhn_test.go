@@ -61,3 +61,22 @@ func TestStringToIntSlice(t *testing.T) {
 		}
     }
 }
+
+func TestTrimWhitespace(t *testing.T) {
+	testCases := []struct {
+        s, expected string;
+    }{
+    	{"5555 5555 5555 4444", "5555555555554444" },
+		{"4012 8888 8888 1881	", "4012888888881881" },
+		{"4111	1111	1111	1111", "4111111111111111"},
+		{"	6011000990139424", "6011000990139424"},
+    }
+
+    for _, tc := range testCases {
+        result := trimWhitespace(tc.s)
+		
+		if result != tc.expected {
+            t.Errorf("isValidLuhn(%v) = %v; want %v", tc.s, result, tc.expected)
+        }
+    }
+}

@@ -1,15 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
+
+func trimWhitespace(s string) string {
+    return strings.Map(func(r rune) rune {
+        if unicode.IsSpace(r) {
+            return -1
+        }
+        return r
+    }, s)
+}
 
 func stringToIntSlice(s string) ([]int, error) {
 	ascii0 := int('0')
-	ascii9 := int('9')
 
 	out := []int{}
 
 	for i, r := range s {
-		if int(r) < ascii0 || int(r) > ascii9 {
+		if !unicode.IsDigit(r) {
 			return []int{}, fmt.Errorf("character [%v] at index %d is not a number", string(r), i)
 		}
 		out = append(out, int(r) - ascii0)
