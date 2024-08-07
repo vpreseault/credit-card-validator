@@ -8,6 +8,9 @@
 *.so
 *.dylib
 
+credit-card-validator
+ccv
+
 # Test binary, built with `go test -c`
 *.test
 

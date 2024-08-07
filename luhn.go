@@ -31,7 +31,7 @@ func stringToIntSlice(s string) ([]int, error) {
 }
 
 func isValidLuhn(s string) (bool, error) {
-
+	s = trimWhitespace(s)
 	n, err := stringToIntSlice(s)
 	if err != nil {
 		return false, err
