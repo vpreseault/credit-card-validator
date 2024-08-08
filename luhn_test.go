@@ -4,34 +4,38 @@ import "testing"
 
 func TestIsValidLuhn(t *testing.T) {
 	testCases := []struct {
-        s string;
+		name, input string;
 		expected bool;
     }{
-    	{"5555555555554444", true},
-		{"4012888888881881", true},
-		{"4111111111111111", true},
-		{"6011000990139424", true},
-    	{"17893729974", true},
-    	{"17893729977", false},
-		{"4012888888888888", false},
+    	{"valid credit card 1", "5555555555554444", true},
+		{"valid credit card 2", "4012888888881881", true},
+		{"valid credit card 3", "4111111111111111", true},
+		{"valid credit card 4", "6011000990139424", true},
+    	{"valid luhn number 1", "17893729974", true},
+    	{"invalid luhn number 1", "17893729977", false},
+		{"invalid credit card 1", "4012888888888888", false},
     }
 
     for _, tc := range testCases {
-        result, err := isValidLuhn(tc.s)
+		// Variable Capturing
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			result, err := isValidLuhn(tc.input)
 
-		if err != nil {
-			t.Fatalf("stringToIntSlice(%v) throws: %v", tc.s, err)
-		}
+			if err != nil {
+				t.Fatalf("isValidLuhn(%v) throws: %v", tc.input, err)
+			}
 
-        if result != tc.expected {
-            t.Errorf("isValidLuhn(%v) = %v; want %v", tc.s, result, tc.expected)
-        }
+			if result != tc.expected {
+				t.Errorf("isValidLuhn(%v) = %v; want %v", tc.input, result, tc.expected)
+			}
+		})	
     }
 }
 
 func TestStringToIntSlice(t *testing.T) {
 	testCases := []struct {
-        s string;
+        input string;
 		expected []int;
     }{
     	{"5555555555554444", []int{5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 4}},
@@ -44,19 +48,19 @@ func TestStringToIntSlice(t *testing.T) {
     }
 
     for _, tc := range testCases {
-        result, err := stringToIntSlice(tc.s)
+        result, err := stringToIntSlice(tc.input)
 
 		if err != nil {
-			t.Fatalf("stringToIntSlice(%v) throws: %v", tc.s, err)
+			t.Fatalf("stringToIntSlice(%v) throws: %v", tc.input, err)
 		}
 
 		if len(result) != len(tc.expected) {
-			t.Fatalf("stringToIntSlice(%v) len(%v) != len(%v)", tc.s, result, tc.expected)
+			t.Fatalf("stringToIntSlice(%v) len(%v) != len(%v)", tc.input, result, tc.expected)
 		}
 		
 		for i := 0; i < len(result); i++ {
 			if result[i] != tc.expected[i] {
-				t.Errorf("stringToIntSlice(%v) = %v; want %v", tc.s, result, tc.expected)
+				t.Errorf("stringToIntSlice(%v) = %v; want %v", tc.input, result, tc.expected)
 			}
 		}
     }
@@ -64,19 +68,23 @@ func TestStringToIntSlice(t *testing.T) {
 
 func TestTrimWhitespace(t *testing.T) {
 	testCases := []struct {
-        s, expected string;
+        name, input, expected string;
     }{
-    	{"5555 5555 5555 4444", "5555555555554444" },
-		{"4012 8888 8888 1881	", "4012888888881881" },
-		{"4111	1111	1111	1111", "4111111111111111"},
-		{"	6011000990139424", "6011000990139424"},
+    	{"separating spaces", "5555 5555 5555 4444", "5555555555554444" },
+		{"trailing tab", "4012 8888 8888 1881	", "4012888888881881" },
+		{"separating tabs", "4111	1111	1111	1111", "4111111111111111"},
+		{"leading tab", "	6011000990139424", "6011000990139424"},
     }
 
     for _, tc := range testCases {
-        result := trimWhitespace(tc.s)
-		
-		if result != tc.expected {
-            t.Errorf("isValidLuhn(%v) = %v; want %v", tc.s, result, tc.expected)
-        }
+		// Variable Capturing
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			result := trimWhitespace(tc.input)
+			
+			if result != tc.expected {
+				t.Errorf("trimWhitespace(%v) = %v; want %v", tc.input, result, tc.expected)
+			}
+		})
     }
 }
