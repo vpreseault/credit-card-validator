@@ -8,21 +8,34 @@ import (
 )
 
 func main() {
-    if len(os.Args) < 2 {
-        scanner := bufio.NewScanner(os.Stdin)
-
-        for scanner.Scan() {
-            line := scanner.Text()
-            checkInput(line)
-        }
+    if len(os.Args) > 1 {
+		input := strings.Join(os.Args[1:], " ")
+		checkInput(input)
+	} else {
+		fileInfo, err := os.Stdin.Stat()
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "Error stating stdin:", err)
+			os.Exit(1)
+		}
+		
+		scanner := bufio.NewScanner(os.Stdin)
+		if (fileInfo.Mode() & os.ModeCharDevice) != 0 {
+			fmt.Println("Please enter a credit card number: ")
+			if scanner.Scan() {
+				line := scanner.Text()
+				checkInput(line)
+			}
+		} else {
+			for scanner.Scan() {
+				line := scanner.Text()
+				checkInput(line)
+			}
+		}
 
         if err := scanner.Err(); err != nil {
             fmt.Fprintln(os.Stderr, "Error reading input:", err)
             os.Exit(1)
         }
-    } else {
-		input := strings.Join(os.Args[1:], " ")
-		checkInput(input)
 	}
 }
 
