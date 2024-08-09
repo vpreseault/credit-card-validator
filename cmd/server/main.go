@@ -15,7 +15,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/", server.HandlerRoot)
-	mux.HandleFunc("GET /api/validate", server.HandlerValidate)
+	mux.HandleFunc("GET /validate", server.HandlerValidate)
 
 
 	srv := &http.Server{
