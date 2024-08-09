@@ -1,4 +1,4 @@
-package main
+package luhn
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ func stringToIntSlice(s string) ([]int, error) {
 	return out, nil
 }
 
-func isValidLuhn(s string) (bool, error) {
+func IsValidLuhn(s string) (bool, error) {
 	s = trimWhitespace(s)
 	n, err := stringToIntSlice(s)
 	if err != nil {

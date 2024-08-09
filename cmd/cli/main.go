@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/vpreseault/credit-card-validator/luhn"
 )
 
 func main() {
@@ -40,7 +42,7 @@ func main() {
 }
 
 func checkInput(input string) {
-	result, err := isValidLuhn(input)
+	result, err := luhn.IsValidLuhn(input)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
