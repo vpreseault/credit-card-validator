@@ -1,4 +1,4 @@
-package main
+package luhn
 
 import "testing"
 
@@ -20,7 +20,7 @@ func TestIsValidLuhn(t *testing.T) {
 		// Variable Capturing
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			result, err := isValidLuhn(tc.input)
+			result, err := IsValidLuhn(tc.input)
 
 			if err != nil {
 				t.Fatalf("isValidLuhn(%v) throws: %v", tc.input, err)
