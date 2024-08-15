@@ -7,7 +7,7 @@ import (
 	"github.com/vpreseault/credit-card-validator/luhn"
 )
 func HandlerRoot(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
+	http.ServeFile(w, r, "./static/index.html")
 }
 
 func HandlerValidate(w http.ResponseWriter, r *http.Request) {
