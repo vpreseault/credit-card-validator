@@ -17,7 +17,7 @@
             background-color: #121212;
             color: #ffffff;
         }
-        h1 {
+        h1, h2 {
             margin-bottom: 20px;
             color: #ffffff;
         }
@@ -57,18 +57,38 @@
         .result-failure {
             color: #F44336; /* Red text */
         }
+        #history-container {
+            margin-top: 20px;
+        }
+        #history > ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #history > ul > li {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: #333;
+        }
     </style>
 </head>
 <body>
 
     <h1>Credit Card Validator</h1>
     
-    <div class="form-container">
+    <form class="form-container">
         <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
         <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result">Validate</button>
-    </div>
+    </form>
 
     <div id="result"></div>
+
+    <div id="history-container">
+        <h2>History</h2>
+        <div id="history"></div>
+    </div>
 
 </body>
 </html>
