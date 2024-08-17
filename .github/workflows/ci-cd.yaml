@@ -28,10 +28,15 @@ jobs:
       run: |
         go test ./...
 
-    - name: Build CLI
+    - name: Build Linux CLI
       if: contains(github.event.head_commit.message, '[cli]')
       run: |
-        go build -o bin/ccv ./cmd/cli
+        GOOS=linux GOARCH=amd64 go build -o bin/ccv ./cmd/cli
+
+    - name: Build Windows CLI
+      if: contains(github.event.head_commit.message, '[cli]')
+      run: |
+        GOOS=windows GOARCH=amd64 go build -o bin/ccv.exe ./cmd/cli
 
   release:
     runs-on: ubuntu-latest
@@ -47,13 +52,19 @@ jobs:
       with:
         go-version: 1.22
 
-    - name: Build CLI for Release
+    - name: Build Linux CLI for Release
       run: |
-        go build -o bin/ccv ./cmd/cli
+        GOOS=linux GOARCH=amd64 go build -o bin/ccv ./cmd/cli
+
+    - name: Build Windows CLI for Release
+      run: |
+        GOOS=windows GOARCH=amd64 go build -o bin/ccv.exe ./cmd/cli
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
-        files: bin/ccv
+        files: |
+          bin/ccv-linux
+          bin/ccv.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
