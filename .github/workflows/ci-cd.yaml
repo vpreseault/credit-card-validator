@@ -64,7 +64,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: |
-          bin/ccv-linux
-          bin/ccv.exe
+          bin/linux/ccv
+          bin/windows/ccv.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
