@@ -63,10 +63,10 @@
 
     <h1>Credit Card Validator</h1>
     
-    <div class="form-container">
+    <form class="form-container">
         <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
         <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result">Validate</button>
-    </div>
+    </form>
 
     <div id="result"></div>
 
