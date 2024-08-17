@@ -17,7 +17,7 @@
             background-color: #121212;
             color: #ffffff;
         }
-        h1 {
+        h1, h2 {
             margin-bottom: 20px;
             color: #ffffff;
         }
@@ -57,6 +57,21 @@
         .result-failure {
             color: #F44336; /* Red text */
         }
+        #history-container {
+            margin-top: 20px;
+        }
+        #history > ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #history > ul > li {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: #333;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +84,11 @@
     </form>
 
     <div id="result"></div>
+
+    <div id="history-container">
+        <h2>History</h2>
+        <div id="history"></div>
+    </div>
 
 </body>
 </html>
