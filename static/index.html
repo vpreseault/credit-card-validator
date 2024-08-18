@@ -48,7 +48,7 @@
         button:hover {
             background-color: #45a049;
         }
-        #result {
+        #result-container {
             margin-top: 20px;
         }
         .result-success {
@@ -80,15 +80,10 @@
     
     <form class="form-container">
         <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
-        <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result">Validate</button>
+        <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result-container">Validate</button>
     </form>
 
-    <div id="result"></div>
-
-    <div id="history-container">
-        <h2>History</h2>
-        <div id="history"></div>
-    </div>
+    <div id="result-container"></div>
 
 </body>
 </html>
