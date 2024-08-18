@@ -12,10 +12,16 @@ func main() {
 	const filepathRoot = "."
 	const port = "8080"
 
+	cfg := server.Config{
+		History: []string{},
+	}
+
 	mux := http.NewServeMux()
 
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+
 	mux.HandleFunc("/", server.HandlerRoot)
-	mux.HandleFunc("GET /validate", server.HandlerValidate)
+	mux.HandleFunc("GET /validate", cfg.HandlerValidate)
 
 
 	srv := &http.Server{

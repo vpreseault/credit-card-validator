@@ -12,7 +12,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             margin: 0;
             background-color: #121212;
             color: #ffffff;
@@ -48,7 +47,7 @@
         button:hover {
             background-color: #45a049;
         }
-        #result {
+        #result-container {
             margin-top: 20px;
         }
         .result-success {
@@ -59,18 +58,29 @@
         }
         #history-container {
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        #history > ul {
+        #history {
             list-style-type: none;
             padding: 0;
+            margin: 0;
         }
 
-        #history > ul > li {
+        #history > li {
             padding: 10px;
-            border: 1px solid #555;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            background-color: #333;
+        }
+        .history-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .icons {
+            width: 20px;
+            height: 20px;
+            padding-right: 10px;
         }
     </style>
 </head>
@@ -80,15 +90,12 @@
     
     <form class="form-container">
         <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
-        <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result">Validate</button>
+        <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result-container">Validate</button>
     </form>
 
-    <div id="result"></div>
+    <div id="result-container"></div>
 
-    <div id="history-container">
-        <h2>History</h2>
-        <div id="history"></div>
-    </div>
+    
 
 </body>
 </html>
