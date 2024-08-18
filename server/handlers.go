@@ -35,34 +35,46 @@ func (cfg *Config) HandlerValidate(w http.ResponseWriter, r *http.Request) {
 }
 
 func (cfg *Config) createTemplate(valid bool, ccn string) string {
+	iconFailure := `<img src="/static/icons/failure2.png" alt="failure icon" class="icons">`
+	iconSuccess := `<img src="/static/icons/success1.png" alt="success icon" class="icons">`
+
 	resultTemplate := ``
 	historyItem := ``
 	if valid {
 		resultTemplate = `<div id="result"><p class="result-success">%s is a valid credit card number!</p></div>`
-		historyItem = `<li class="history-success">%s</li>`
+		historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconSuccess, ccn)
 	} else {
 		resultTemplate = `<div id="result"><p class="result-failure">%s is an invalid credit card number.</p></div>`
-		historyItem = `<li class="history-failure">%s</li>`
+		historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconFailure, ccn)
 	}
 	resultTemplate = fmt.Sprintf(resultTemplate, ccn)
-	historyItem = fmt.Sprintf(historyItem, ccn)
 
 	cfg.History = append(cfg.History, historyItem)
 
+	historyListTemplate := cfg.createHistoryListTemplate()
+
+	template := fmt.Sprintf(`
+		%s
+		%s
+	`, resultTemplate, historyListTemplate)
+
+	return template
+}
+
+func (cfg *Config) createHistoryListTemplate() string {
 	historyItemsTemplate := ``
 	for i := len(cfg.History) - 1; i >= 0; i-- {
 		historyItemsTemplate += cfg.History[i]
 	}
 
 	template := fmt.Sprintf(`
-		%s
 		<div id="history-container">
 			<h2>History</h2>
-			<div id="history">
+			<ul id="history">
 				%s
-			</div>
+			</ul>
     	</div>
-	`, resultTemplate, historyItemsTemplate)
+	`, historyItemsTemplate)
 
 	return template
 }
