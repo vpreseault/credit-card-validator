@@ -4,35 +4,35 @@ import (
 	"strings"
 )
 
-func encodeHistoryCookie(history map[string]bool) string {
+func encodeHistoryCookie(history []HistoryItem) string {
 	cookie := ""
-	for ccn, valid := range history {
-		historyItem := ""
-		if valid {
-			historyItem += "s"
+	for _, item := range history {
+		historyItemString := ""
+		if item.Valid {
+			historyItemString += "s"
 		} else {
-			historyItem += "f"
+			historyItemString += "f"
 		}
-		historyItem += ccn
+		historyItemString += item.CCN
 
-		cookie += historyItem + "|"
+		cookie += historyItemString + "|"
 	}
 	return cookie
 }
 
-func decodeHistoryCookie(cookie string) map[string]bool {
-	history := map[string]bool{}
-	historyItems := strings.Split(cookie, "|")
-	for _, historyItem := range historyItems {
-		if len(historyItem) < 2 {
+func decodeHistoryCookie(cookie string) []HistoryItem {
+	history := []HistoryItem{}
+	historyItemStrings := strings.Split(cookie, "|")
+	for _, historyItemString := range historyItemStrings {
+		if len(historyItemString) < 2 {
 			continue
 		}
 		valid := false
-		if historyItem[0] == 's' {
+		if historyItemString[0] == 's' {
 			valid = true
 		}
-		ccn := historyItem[1:]
-		history[ccn] = valid
+		ccn := historyItemString[1:]
+		history = append(history, HistoryItem{CCN: ccn, Valid: valid})
 	}
 	return history
 }

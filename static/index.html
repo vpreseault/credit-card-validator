@@ -93,9 +93,7 @@
         <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result-container">Validate</button>
     </form>
 
-    <div id="result-container"></div>
-
-    
+    <div id="result-container" hx-get="/history" hx-trigger="load"></div>
 
 </body>
 </html>

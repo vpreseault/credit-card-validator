@@ -18,7 +18,7 @@ func main() {
 
 	mux.HandleFunc("/", server.HandlerRoot)
 	mux.HandleFunc("GET /validate", server.HandlerValidate)
-
+	mux.HandleFunc("GET /history", server.HandlerGetHistory)
 
 	srv := &http.Server{
 		Addr:    "0.0.0.0:" + port,

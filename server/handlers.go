@@ -7,8 +7,9 @@ import (
 	"github.com/vpreseault/credit-card-validator/luhn"
 )
 
-type Config struct {
-	History []string
+type HistoryItem struct {
+	CCN   string
+	Valid bool
 }
 
 func HandlerRoot(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +25,7 @@ func HandlerValidate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	history := make(map[string]bool)
+	history := []HistoryItem{}
 	cookie, err := r.Cookie("validationHistory")
 	if err == nil {
 		history = decodeHistoryCookie(cookie.Value)
@@ -32,7 +33,7 @@ func HandlerValidate(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error getting cookie: %v", err)
 	}
 	
-	history[ccn] = valid
+	history = addHistoryItem(history, ccn, valid)
 
 	historyString := encodeHistoryCookie(history)
 	http.SetCookie(w, &http.Cookie{
@@ -42,6 +43,24 @@ func HandlerValidate(w http.ResponseWriter, r *http.Request) {
 	})
 
 	template := createTemplate(valid, ccn, history)
+
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.WriteHeader(http.StatusOK)
+	_, err = w.Write([]byte(template))
+	if err != nil {
+		http.Error(w, "Unable to write response", http.StatusInternalServerError)
+	}
+}
+
+func HandlerGetHistory(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("validationHistory")
+	if err != nil {
+		log.Printf("Error getting cookie: %v", err)
+		return
+	}
+
+	history := decodeHistoryCookie(cookie.Value)
+	template := createHistoryListTemplate(history)
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)

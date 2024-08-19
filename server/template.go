@@ -2,7 +2,7 @@ package server
 
 import "fmt"
 
-func createTemplate(valid bool, ccn string, history map[string]bool) string {
+func createTemplate(valid bool, ccn string, history []HistoryItem) string {
 	resultTemplate := createResultTemplate(valid, ccn)
 	historyListTemplate := createHistoryListTemplate(history)
 
@@ -26,18 +26,20 @@ func createResultTemplate(valid bool, ccn string) string {
 	return resultTemplate
 }
 
-func createHistoryListTemplate(history map[string]bool) string {
+func createHistoryListTemplate(history []HistoryItem) string {
 	iconFailure := `<img src="/static/icons/failure2.png" alt="failure icon" class="icons">`
 	iconSuccess := `<img src="/static/icons/success1.png" alt="success icon" class="icons">`
 
 	historyItemsTemplate := ``
-	for ccn, valid := range history {
+	for _, item := range history {
 		historyItem := ``
-		if valid {
-			historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconSuccess, ccn)
+		if item.Valid {
+			historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconSuccess, item.CCN)
 		} else {
-			historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconFailure, ccn)
+			historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconFailure, item.CCN)
 		}
+		
+		// Add the new history item to the top of the list
 		historyItemsTemplate = historyItem + historyItemsTemplate
 	}
 
