@@ -1,7 +1,6 @@
 package server
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/vpreseault/credit-card-validator/luhn"
@@ -17,8 +16,7 @@ func HandlerRoot(w http.ResponseWriter, r *http.Request) {
 }
 
 func HandlerValidate(w http.ResponseWriter, r *http.Request) {
-	params := r.URL.Query()
-	ccn := params["cc-number"][0]
+	ccn := r.URL.Query().Get("cc-number")
 	valid, err := luhn.IsValidLuhn(ccn)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -29,8 +27,6 @@ func HandlerValidate(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("validationHistory")
 	if err == nil {
 		history = decodeHistoryCookie(cookie.Value)
-	} else {
-		log.Printf("Error getting cookie: %v", err)
 	}
 	
 	history = addHistoryItem(history, ccn, valid)
@@ -55,7 +51,7 @@ func HandlerValidate(w http.ResponseWriter, r *http.Request) {
 func HandlerGetHistory(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("validationHistory")
 	if err != nil {
-		log.Printf("Error getting cookie: %v", err)
+		// No history cookie
 		return
 	}
 

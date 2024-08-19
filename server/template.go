@@ -32,15 +32,15 @@ func createHistoryListTemplate(history []HistoryItem) string {
 
 	historyItemsTemplate := ``
 	for _, item := range history {
-		historyItem := ``
+		historyItemTemplate := ``
 		if item.Valid {
-			historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconSuccess, item.CCN)
+			historyItemTemplate = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconSuccess, item.CCN)
 		} else {
-			historyItem = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconFailure, item.CCN)
+			historyItemTemplate = fmt.Sprintf(`<li class="history-item">%s %s</li>`, iconFailure, item.CCN)
 		}
 		
 		// Add the new history item to the top of the list
-		historyItemsTemplate = historyItem + historyItemsTemplate
+		historyItemsTemplate = historyItemTemplate + historyItemsTemplate
 	}
 
 	template := fmt.Sprintf(`
