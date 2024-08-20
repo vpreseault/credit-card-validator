@@ -4,17 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="/static/icons/credit.png">
     <title>Credit Card Validator</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        header {
+            display: flex;
+            justify-content: right;
+            padding: 20px;
+        }
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+        section {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 0;
-            background-color: #121212;
-            color: #ffffff;
         }
         h1, h2 {
             margin-bottom: 20px;
@@ -86,14 +103,21 @@
 </head>
 <body>
 
-    <h1>Credit Card Validator</h1>
+    <header>
+        <a href="https://github.com/vpreseault/credit-card-validator" target="_blank">Github</a>
+        <a href="https://github.com/vpreseault/credit-card-validator#" target="_blank">About</a>
+    </header>
+
+    <section>
+        <h1>Credit Card Validator</h1>
+        
+        <form class="form-container">
+            <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
+            <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result-container">Validate</button>
+        </form>
     
-    <form class="form-container">
-        <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
-        <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result-container">Validate</button>
-    </form>
-
-    <div id="result-container" hx-get="/history" hx-trigger="load"></div>
-
+        <div id="result-container" hx-get="/history" hx-trigger="load"></div>
+    </section>
+  
 </body>
 </html>
