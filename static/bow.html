@@ -8,13 +8,27 @@
     <title>Credit Card Validator</title>
 
     <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        #bow {
+            position: absolute;
+        }
+        img {
+            width: 50%;
+            height: auto;
+        }
+    </style>
 </head>
 <body>
 
     <header>
+        <a href="/">Home</a>
         <a href="https://github.com/vpreseault/credit-card-validator" target="_blank">Github</a>
         <a href="https://github.com/vpreseault/credit-card-validator#" target="_blank">About</a>
     </header>
+  
+    <section id="bow">
+        <img src="/static/bow.webp" alt="Image of a pink cartoon bow">
+    </section>
 
     <section>
         <h1>Credit Card Validator</h1>
@@ -26,6 +40,5 @@
     
         <div id="result-container" hx-get="/history" hx-trigger="load"></div>
     </section>
-  
 </body>
 </html>

@@ -15,6 +15,10 @@ func HandlerRoot(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./static/index.html")
 }
 
+func HandlerBow(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "./static/bow.html")
+}
+
 func HandlerValidate(w http.ResponseWriter, r *http.Request) {
 	ccn := r.URL.Query().Get("cc-number")
 	valid, err := luhn.IsValidLuhn(ccn)
