@@ -11,6 +11,7 @@
     <style>
         #bow {
             position: absolute;
+            width: 100%;
         }
         img {
             width: 50%;
@@ -34,7 +35,7 @@
         <h1>Credit Card Validator</h1>
         
         <form class="form-container">
-            <input type="text" id="cc-number" name="cc-number" placeholder="Enter credit card number" required>
+            <input type="text" id="cc-number" name="cc-number" placeholder="Ex: 5555 5555 5555 4444" required>
             <button hx-get="/validate" hx-include="[name='cc-number']" hx-target="#result-container">Validate</button>
         </form>
     
