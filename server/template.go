@@ -27,8 +27,8 @@ func createResultTemplate(valid bool, ccn string) string {
 }
 
 func createHistoryListTemplate(history []HistoryItem) string {
-	iconFailure := `<img src="/static/icons/failure2.png" alt="failure icon" class="icons">`
-	iconSuccess := `<img src="/static/icons/success1.png" alt="success icon" class="icons">`
+	iconFailure := `<img src="/static/icons/failure.png" alt="failure icon" class="icons">`
+	iconSuccess := `<img src="/static/icons/success.png" alt="success icon" class="icons">`
 
 	historyItemsTemplate := ``
 	for _, item := range history {

@@ -17,6 +17,7 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	mux.HandleFunc("/", server.HandlerRoot)
+	mux.HandleFunc("/bow", server.HandlerBow)
 	mux.HandleFunc("GET /validate", server.HandlerValidate)
 	mux.HandleFunc("GET /history", server.HandlerGetHistory)
 
