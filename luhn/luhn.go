@@ -15,6 +15,15 @@ func trimWhitespace(s string) string {
     }, s)
 }
 
+func removeDashes(s string) string {
+	return strings.ReplaceAll(s, "-", "")
+}
+
+func cleanInput(s string) string {
+	s = trimWhitespace(s)
+	return removeDashes(s)
+}
+
 func stringToIntSlice(s string) ([]int, error) {
 	ascii0 := int('0')
 
@@ -31,7 +40,7 @@ func stringToIntSlice(s string) ([]int, error) {
 }
 
 func IsValidLuhn(s string) (bool, error) {
-	s = trimWhitespace(s)
+	s = cleanInput(s)
 	n, err := stringToIntSlice(s)
 	if err != nil {
 		return false, err
