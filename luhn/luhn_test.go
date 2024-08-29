@@ -88,3 +88,24 @@ func TestTrimWhitespace(t *testing.T) {
 		})
     }
 }
+
+func TestRemoveDashes(t *testing.T) {
+	testCases := []struct {
+        name, input, expected string;
+    }{
+    	{"separating dashes", "5555-5555-5555-4444", "5555555555554444" },
+		{"surrounding dashes", "-4012888888881881-", "4012888888881881" },
+    }
+
+    for _, tc := range testCases {
+		// Variable Capturing
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			result := removeDashes(tc.input)
+			
+			if result != tc.expected {
+				t.Errorf("removeDashes(%v) = %v; want %v", tc.input, result, tc.expected)
+			}
+		})
+    }
+}
