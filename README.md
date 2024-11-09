@@ -1,4 +1,4 @@
-# credit-card-validator
+# Credit Card Validator
 
 A simple credit card validator implemented using Go and HTMX, offered in both a Command Line and Web App interface.
 
