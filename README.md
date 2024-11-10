@@ -12,14 +12,16 @@ A simple credit card validator implemented using Go and HTMX, offered in both a 
 
 ## Learning Objectives
 
-- Learn and use HTMX in a project
 - Start an finish a project using Go
+- Learn and use HTMX in a project
 - Create both a CLI and Web server sharing the same internal logic without duplication
 - Deploy a web server using a cloud platform (Railway in this case)
 
 ## Motivation
 
-In all of my projects, I try to get out of my comfort zone and try things that I have little to no experience with. I've been messing around with Go for a while now but never really found anything to build that was interesting but also reasonable for my skillset. Then one day, I stumbled upon the Luhn algorithmn and decided to take a crack at implementing it in Go. Everything just kept on going after that until I landed on the final product. I decided to add HTMX into the mix when I started building the web server portion after finishing the CLI. I kept finding new features to add and though the project strayed a little from its origins, I think the CLI and Web wrapper around the Luhn algorithmn was a cool evolution to the project.
+In all of my projects, I try to get out of my comfort zone and try things that I have little to no experience with. I've been messing around with Go for a while now but never really found anything to build that was interesting while still being reasonable for my skillset. After stumbling upon the Luhn algorithmn, I decided to take a crack at implementing it in Go. 
+
+I decided to add HTMX into the mix when I started building the web server portion after finishing the CLI. I kept finding new features to add and though the project strayed a little from its origins, I think the CLI and Web wrapper around the Luhn algorithmn was a cool evolution to the project.
 
 ## Usage
 
