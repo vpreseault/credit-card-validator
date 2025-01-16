@@ -54,8 +54,8 @@ Build the CLI executable:
 go build -o ccv ./cmd/cli
 ```
 
-Note:
-if you receive this error or something similar when running the program:
+> [NOTE]
+> If you receive the following error on Windows you may need to convert the binary into an executable file.
 
 ```bash
 ccv : The term 'ccv' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and 
@@ -66,8 +66,6 @@ At line:1 char:1
     + CategoryInfo          : ObjectNotFound: (ccv:String) [], CommandNotFoundException
     + FullyQualifiedErrorId : CommandNotFoundException
 ```
-
-you may need to convert the binary into an executable file if you're on windows.
 
 #### 2. Run the CLI
 
@@ -93,4 +91,36 @@ echo "4111111111111111" | ./ccv
 cat static/credit.txt | ./ccv
 ```
 
-Note: This program does not verify the credit card numbers for transactional purposes. The validation only verifies if the number could be used as a credit card number.
+> [NOTE]
+> This program does not verify the credit card numbers for transactional purposes. The validation only verifies if the number could be used as a credit card number.
+
+## 🤝 Contributing
+
+### Clone the repo
+
+```bash
+git clone https://github.com/vpreseault/credit-card-validator
+cd credit-card-validator
+```
+
+### Build the project
+
+```bash
+go build
+```
+
+### Run the project
+
+```bash
+./ccv
+```
+
+### Run the tests
+
+```bash
+go test ./...
+```
+
+### Submit a pull request
+
+If you'd like to contribute, please fork the repository and open a pull request to the `master` branch.
