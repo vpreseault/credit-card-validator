@@ -54,7 +54,7 @@ Build the CLI executable:
 go build -o ccv ./cmd/cli
 ```
 
-> [NOTE]
+> [!NOTE]
 > If you receive the following error on Windows you may need to convert the binary into an executable file.
 
 ```bash
@@ -91,7 +91,7 @@ echo "4111111111111111" | ./ccv
 cat static/credit.txt | ./ccv
 ```
 
-> [NOTE]
+> [!NOTE]
 > This program does not verify the credit card numbers for transactional purposes. The validation only verifies if the number could be used as a credit card number.
 
 ## 🤝 Contributing
